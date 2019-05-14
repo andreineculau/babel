@@ -45,7 +45,7 @@ export const logPluginOrPolyfill = (
     .replace(/^\{"/, '{ "')
     .replace(/"\}$/, '" }');
 
-  console.log(`  ${item} ${formattedTargets}`);
+  console.warn(`  ${item} ${formattedTargets}`);
 };
 
 export const logEntryPolyfills = (
@@ -57,17 +57,17 @@ export const logEntryPolyfills = (
   allBuiltInsList: { [key: string]: Targets },
 ) => {
   if (!importPolyfillIncluded) {
-    console.log(`\n[${filename}] Import of ${polyfillName} was not found.`);
+    console.warn(`\n[${filename}] Import of ${polyfillName} was not found.`);
     return;
   }
   if (!polyfills.size) {
-    console.log(
+    console.warn(
       `\n[${filename}] Based on your targets, polyfills were not added.`,
     );
     return;
   }
 
-  console.log(
+  console.warn(
     `\n[${filename}] Replaced ${polyfillName} entries with the following polyfill${wordEnds(
       polyfills.size,
     )}:`,
@@ -84,12 +84,12 @@ export const logUsagePolyfills = (
   allBuiltInsList: { [key: string]: Targets },
 ) => {
   if (!polyfills.size) {
-    console.log(
+    console.warn(
       `\n[${filename}] Based on your code and targets, core-js polyfills were not added.`,
     );
     return;
   }
-  console.log(
+  console.warn(
     `\n[${filename}] Added following core-js polyfill${wordEnds(
       polyfills.size,
     )}:`,
